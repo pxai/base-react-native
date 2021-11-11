@@ -1,10 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
 
-export default function App() {
+Amplify.configure(awsconfig);
+
+function App() {
   return (
     <View style={styles.container}>
+      <AmplifySignOut />
       <Text>This is working!</Text>
       <StatusBar style="auto" />
     </View>
@@ -19,3 +25,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default withAuthenticator(App);
